@@ -27,9 +27,6 @@ class InstagramApi {
     var hashTagId = await _fetchHashTagId(text);
     if (hashTagId == '') return [];
 
-    // print('debug fetchImage hashTagId');
-    // print(hashTagId);
-
     var url = Uri.https(AppCommon.apiEndpoint, '/v12.0/$hashTagId/top_media', {
       'user_id': AppCommon.userId,
       'access_token': AppCommon.accessToken,
@@ -40,14 +37,8 @@ class InstagramApi {
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
-      // fix me
-      // final res = InstagramModel.fromJson(json.decode(response.body));
-
       // {'data': [{'media_url': 'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/269652154_3074189952796578_8913276454060245461_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=8ae9d6&_nc_ohc=80WGvTFR-NsAX9KcHj4&_nc_ht=scontent-nrt1-1.cdninstagram.com&edm=APCawUEEAAAA&oh=00_AT8wKCXoLxU7BGBWXyValdJzMSizB74xWlaRFfPmvh3n0Q&oe=61C3B854', 'id': '17929805149909277'}], 'paging': {'cursors': {'after': 'ODc2OTU3OTcyYWU4NGUzMGE4NWFjMWEyOWZAmZAGQ0ZAWEZD'}, 'next': 'https://graph.facebook.com/v12.0/17842267372066786/top_media?access_token=EAAVvr4m3jlUBAJoc0FyQIptZCNMRUDCwbTXdEeSk0njdoCrOSLD6pATdsehI0x6lpfFI12SFS4ZBh8j15a6W3Db8ZCXdKnkYcqVwhZBQLilhdTRPZAjpgeUL8Ht7BQrb54CCZCHSipjSW4G6IbpTaPVpEFwQtueXGeJVqNXXEBDxqHKByscDxZAgV4qPVgQM6kZD&fields=media_url&user_id=17841403696078654&limit=1&after=ODc2OTU3OTcyYWU4NGUzMGE4NWFjMWEyOWZAmZAGQ0ZAWEZD'}}
       final res = InstagramModel.fromJson(json.decode(response.body));
-
-      print('debug api');
-      print(res.data);
 
       return res.data;
     }
